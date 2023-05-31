@@ -6,7 +6,19 @@ import { abort } from "process";
 export interface BoardGame {
   id: number;
   name: string;
-  thumbnail: string;
+  image: string;
+  status: Status;
+  ranks: Rank[];
+}
+
+export interface Rank {
+  name: string;
+  friendlyname: string;
+  value: string;
+}
+
+interface Status {
+  own: string;
 }
 
 const useGames = () => {
@@ -14,7 +26,7 @@ const useGames = () => {
   const [error, setError] = useState("");
   const dbRef = ref(db);
   useEffect(() => {
-    get(child(dbRef, `items/item`))
+    get(child(dbRef, `1`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           const gamesData = snapshot.val();
@@ -26,7 +38,7 @@ const useGames = () => {
           );
           setGames(updatedGames);
 
-          console.log(games);
+          //console.log(games);
         } else {
           setError("No data available");
         }
