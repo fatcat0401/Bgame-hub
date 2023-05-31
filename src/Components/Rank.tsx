@@ -5,8 +5,15 @@ interface Props {
 }
 
 const Rank = ({ brank }: Props) => {
-  const rank = parseInt(brank);
-  const color = rank < 200 ? "green" : rank < 500 ? "blue" : "red";
+  const rank = isNaN(parseInt(brank)) ? "Not Ranked" : parseInt(brank);
+  const color =
+    typeof rank === "string"
+      ? "gray.500"
+      : rank < 200
+      ? "green"
+      : rank < 500
+      ? "blue"
+      : "red";
   return (
     <Badge colorScheme={color} padding={1} fontSize={"md"}>
       {rank}

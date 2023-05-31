@@ -24,8 +24,12 @@ const GameCard = ({ game }: Props) => {
         <Heading fontSize="2xl" marginY={3}>
           {game.name}
         </Heading>
-        {game.ranks.map((rank) => (
-          <HStack color={"gray.500"} justifyContent={"space-between"}>
+        {game.ranks.map((rank, index) => (
+          <HStack
+            key={index}
+            color={"gray.500"}
+            justifyContent={"space-between"}
+          >
             <Text>
               {rank.name === "boardgame"
                 ? "Overall"
