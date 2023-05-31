@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import db from "../services/api-client";
 import { abort } from "process";
 
-interface BoardGame {
+export interface BoardGame {
   id: number;
   name: string;
+  thumbnail: string;
 }
 
 const useGames = () => {
