@@ -6,7 +6,8 @@ import { abort } from "process";
 export interface BoardGame {
   id: number;
   name: string;
-  image: string;
+  //image: string;
+  thumbnail: string;
   status: Status;
   ranks: Rank[];
 }
@@ -24,8 +25,12 @@ interface Status {
 const useGames = () => {
   const [games, setGames] = useState<BoardGame[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoadingState] = useState(false);
+
   const dbRef = ref(db);
   useEffect(() => {
+    setLoadingState(true);
+
     get(child(dbRef, `1`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -37,17 +42,18 @@ const useGames = () => {
             })
           );
           setGames(updatedGames);
-
           //console.log(games);
         } else {
           setError("No data available");
         }
+        setLoadingState(false);
       })
       .catch((error) => {
         setError(error.message);
+        setLoadingState(false);
       });
   }, []);
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
