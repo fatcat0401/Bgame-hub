@@ -18,11 +18,17 @@ interface Props {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card overflow="hidden" borderRadius="lg">
-      <Image src={game.image} h={"70%"} />
+    <Card h={"100%"}>
+      <Image
+        src={game.thumbnail}
+        //objectFit={"cover"}
+        boxSize={"200px"}
+        alignSelf={"center"}
+      />
       <CardBody padding={"5px"}>
         <Heading fontSize="2xl" marginY={3}>
           {game.name}
+          {game.id}
         </Heading>
         {game.ranks.map((rank, index) => (
           <HStack
