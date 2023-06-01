@@ -24,6 +24,7 @@ const GameCard = ({ game }: Props) => {
         //objectFit={"cover"}
         boxSize={"200px"}
         alignSelf={"center"}
+        padding={1}
       />
       <CardBody padding={"5px"}>
         <Heading fontSize="2xl" marginY={3}>

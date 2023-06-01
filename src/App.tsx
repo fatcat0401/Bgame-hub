@@ -5,7 +5,7 @@ import HotnessList from "./Components/HotnessList";
 import Genres from "./Components/Genres";
 import { useState } from "react";
 function App() {
-  const [category, setCategory] = useState("thematic");
+  const [genre, setGenre] = useState("boardgame");
   return (
     <Grid
       templateAreas={{
@@ -28,8 +28,11 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" textAlign={"center"}>
-        <Genres onSelectedCategory={(cat) => setCategory(cat)} />
-        <GameGrid selectedCategory={category} />
+        <Genres
+          onSelectedGenre={(genre) => setGenre(genre)}
+          selectedGenre={genre}
+        />
+        <GameGrid selectedGenre={genre} />
       </GridItem>
     </Grid>
   );

@@ -7,10 +7,11 @@ interface Genres {
 }
 
 interface Props {
-  onSelectedCategory: (genre: string) => void;
+  onSelectedGenre: (genre: string) => void;
+  selectedGenre: string;
 }
 
-const Genres = ({ onSelectedCategory }: Props) => {
+const Genres = ({ onSelectedGenre, selectedGenre }: Props) => {
   const genres = [
     { name: "All", color: "blue", slug: "boardgame" },
     { name: "Family", color: "pink", slug: "familygames" },
@@ -29,7 +30,9 @@ const Genres = ({ onSelectedCategory }: Props) => {
         <Button
           key={genre.name}
           colorScheme={genre.color}
-          onClick={() => onSelectedCategory(genre.slug)}
+          onClick={() => onSelectedGenre(genre.slug)}
+          fontWeight={genre.slug === selectedGenre ? "extrabold" : "normal"}
+          fontSize={"xl"}
         >
           {genre.name}
         </Button>

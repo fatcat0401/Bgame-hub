@@ -6,22 +6,22 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 
 interface Props {
-  selectedCategory: string;
+  selectedGenre: string;
 }
 
-const GameGrid = ({ selectedCategory }: Props) => {
+const GameGrid = ({ selectedGenre }: Props) => {
   const { games, error, isLoading } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
   const filteredGames = games.filter(
     (game) =>
       game.ranks &&
       game.ranks.length > 0 &&
-      game.ranks.some((rank) => rank.name === selectedCategory)
+      game.ranks.some((rank) => rank.name === selectedGenre)
   );
-  // let isCategory = (category: string, game: BoardGame) => {
+  // let isGenre = (Genre: string, game: BoardGame) => {
   //   const ranks = game.ranks;
   //   ranks.forEach((item) => {
-  //     if (item.name === category) {
+  //     if (item.name === Genre) {
   //       console.log("true");
   //       return true;
   //     } else {
