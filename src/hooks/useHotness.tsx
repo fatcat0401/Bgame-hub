@@ -26,6 +26,7 @@ const useHotness = () => {
       .catch((error) => {
         setError(error.message);
         setLoading(false);
+        return controller.abort();
       });
   }, []);
   return { hotness, error, isLoading };

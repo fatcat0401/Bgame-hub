@@ -6,11 +6,14 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGames";
 import Genres from "./Components/Genres";
 
+export interface GameQuery {
+  genre: Genre;
+}
+
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre>({
-    name: "All",
-    slug: "boardgame",
-  });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genre: { name: "All", slug: "boardgame" },
+  } as GameQuery);
 
   return (
     <Grid
@@ -35,10 +38,10 @@ function App() {
       </Show>
       <GridItem area="main">
         <Genres
-          selectedGenre={selectedGenre}
-          onSelectedGenre={(genre) => setSelectedGenre(genre)}
+          selectedGenre={gameQuery.genre}
+          onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
         />
-        <GameGrid selectedGenre={selectedGenre} />
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );

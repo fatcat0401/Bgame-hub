@@ -4,19 +4,20 @@ import useGames, { BoardGame, Genre } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import { GameQuery } from "../App";
 
 interface Props {
-  selectedGenre: Genre;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ gameQuery }: Props) => {
   const { games, error, isLoading } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
   const filteredGames = games.filter(
     (game) =>
       game.ranks &&
       game.ranks.length > 0 &&
-      game.ranks.some((rank) => rank.name === selectedGenre.slug)
+      game.ranks.some((rank) => rank.name === gameQuery?.genre.slug)
   );
 
   return (
