@@ -1,17 +1,21 @@
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
 import React from "react";
-
-interface Genres {
-  name: string;
-  color: string;
-}
+import { Genre } from "../hooks/useGames";
 
 interface Props {
-  onSelectedGenre: (genre: string) => void;
-  selectedGenre: string;
+  onSelectedGenre: (genre: Genre) => void;
+  selectedGenre: Genre;
 }
 
-const Genres = ({ onSelectedGenre, selectedGenre }: Props) => {
+const Genres = ({ selectedGenre, onSelectedGenre }: Props) => {
   const genres = [
     { name: "All", color: "blue", slug: "boardgame" },
     { name: "Family", color: "pink", slug: "familygames" },
@@ -19,25 +23,37 @@ const Genres = ({ onSelectedGenre, selectedGenre }: Props) => {
     { name: "Strategy", color: "orange", slug: "strategygames" },
   ];
   return (
-    <ButtonGroup
-      variant={"ghost"}
-      justifyContent={"space-evenly"}
-      //w={{ sm: "100%", md: "70%", lg: "50%" }}
-      padding={5}
-      spacing={5}
-    >
-      {genres.map((genre) => (
-        <Button
-          key={genre.name}
-          colorScheme={genre.color}
-          onClick={() => onSelectedGenre(genre.slug)}
-          fontWeight={genre.slug === selectedGenre ? "extrabold" : "normal"}
-          fontSize={"xl"}
-        >
-          {genre.name}
-        </Button>
-      ))}
-    </ButtonGroup>
+    <Menu>
+      <MenuButton marginX={3} as={Button} rightIcon={<BsChevronDown />}>
+        {selectedGenre.name}
+      </MenuButton>
+      <MenuList>
+        {genres.map((genre) => (
+          <MenuItem key={genre.name} onClick={() => onSelectedGenre(genre)}>
+            {genre.name}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+    // <ButtonGroup
+    //   variant={"ghost"}
+    //   justifyContent={"space-evenly"}
+    //   //w={{ sm: "100%", md: "70%", lg: "50%" }}
+    //   padding={5}
+    //   spacing={3}
+    // >
+    //   {genres.map((genre) => (
+    //     <Button
+    //       key={genre.name}
+    //       colorScheme={genre.color}
+    //       onClick={() => onSelectedGenre(genre.slug)}
+    //       fontWeight={genre.slug === selectedGenre ? "extrabold" : "normal"}
+    //       fontSize={"xl"}
+    //     >
+    //       {genre.name}
+    //     </Button>
+    //   ))}
+    // </ButtonGroup>
   );
 };
 

@@ -10,12 +10,18 @@ export interface BoardGame {
   thumbnail: string;
   status: Status;
   ranks: Rank[];
+  average: string;
 }
 
 export interface Rank {
   name: string;
   friendlyname: string;
   value: string;
+}
+
+export interface Genre {
+  name: string;
+  slug: string;
 }
 
 interface Status {
@@ -26,7 +32,6 @@ const useGames = () => {
   const [games, setGames] = useState<BoardGame[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoadingState] = useState(false);
-
   const dbRef = ref(db);
   useEffect(() => {
     setLoadingState(true);

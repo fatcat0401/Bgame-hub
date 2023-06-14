@@ -1,12 +1,12 @@
 import { SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 
-import useGames, { BoardGame } from "../hooks/useGames";
+import useGames, { BoardGame, Genre } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 
 interface Props {
-  selectedGenre: string;
+  selectedGenre: Genre;
 }
 
 const GameGrid = ({ selectedGenre }: Props) => {
@@ -16,20 +16,9 @@ const GameGrid = ({ selectedGenre }: Props) => {
     (game) =>
       game.ranks &&
       game.ranks.length > 0 &&
-      game.ranks.some((rank) => rank.name === selectedGenre)
+      game.ranks.some((rank) => rank.name === selectedGenre.slug)
   );
-  // let isGenre = (Genre: string, game: BoardGame) => {
-  //   const ranks = game.ranks;
-  //   ranks.forEach((item) => {
-  //     if (item.name === Genre) {
-  //       console.log("true");
-  //       return true;
-  //     } else {
-  //       console.log("false");
-  //       return true;
-  //     }
-  //   });
-  // };
+
   return (
     <>
       {error && <Text>{error}</Text>}

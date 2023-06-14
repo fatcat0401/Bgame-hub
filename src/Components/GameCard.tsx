@@ -1,7 +1,9 @@
 import {
+  Badge,
   Box,
   Card,
   CardBody,
+  CardFooter,
   Center,
   HStack,
   Heading,
@@ -45,6 +47,12 @@ const GameCard = ({ game }: Props) => {
             <Rank brank={rank.value} />
           </HStack>
         ))}
+
+        <CardFooter pl={"100px"} >
+          <Badge fontSize={"3xl"} fontWeight={"extrabold"} colorScheme="blue">
+            {game.average.substring(0, 4)}
+          </Badge>
+        </CardFooter>
       </CardBody>
     </Card>
   );

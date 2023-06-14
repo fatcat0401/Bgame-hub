@@ -2,10 +2,16 @@ import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./Components/NavBar";
 import GameGrid from "./Components/GameGrid";
 import HotnessList from "./Components/HotnessList";
-import Genres from "./Components/Genres";
 import { useState } from "react";
+import { Genre } from "./hooks/useGames";
+import Genres from "./Components/Genres";
+
 function App() {
-  const [genre, setGenre] = useState("boardgame");
+  const [selectedGenre, setSelectedGenre] = useState<Genre>({
+    name: "All",
+    slug: "boardgame",
+  });
+
   return (
     <Grid
       templateAreas={{
@@ -27,12 +33,12 @@ function App() {
           <HotnessList />
         </GridItem>
       </Show>
-      <GridItem area="main" textAlign={"center"}>
+      <GridItem area="main">
         <Genres
-          onSelectedGenre={(genre) => setGenre(genre)}
-          selectedGenre={genre}
+          selectedGenre={selectedGenre}
+          onSelectedGenre={(genre) => setSelectedGenre(genre)}
         />
-        <GameGrid selectedGenre={genre} />
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );
