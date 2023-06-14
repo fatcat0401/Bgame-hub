@@ -4,7 +4,7 @@ export interface Hotness {
   yearpublished: string | null;
 }
 
-export const getHotness = (res: any) => {
+export function xml2Obj<T>(res: any, list: (keyof T)[]) {
   const text = res.data;
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(text, "text/xml");
@@ -12,23 +12,17 @@ export const getHotness = (res: any) => {
   const items = xmlDoc.getElementsByTagName("item");
 
   // Transform items into an array of Hotness objects
-  const hotnessArray: Hotness[] = [];
+  const hotnessArray: T[] = [];
+
   for (let i = 0; i < items.length; i++) {
-    const gameName = items[i]
-      .getElementsByTagName("name")[0]
-      .getAttribute("value");
-    const gameThumbnail = items[i]
-      .getElementsByTagName("thumbnail")[0]
-      .getAttribute("value");
-    const year = items[i]
-      .getElementsByTagName("yearpublished")[0]
-      .getAttribute("value");
-    const hotnessObj: Hotness = {
-      name: gameName,
-      thumbnail: gameThumbnail,
-      yearpublished: year,
-    }; // Modify this based on the actual properties of Hotness
-    hotnessArray.push(hotnessObj);
+    const obj: Partial<T> = {};
+    list.forEach((comp) => {
+      obj[comp] = (items[i]
+        .getElementsByTagName(comp as string)[0]
+        ?.getAttribute("value") || null) as T[keyof T] | undefined;
+    });
+
+    hotnessArray.push(obj as T);
   }
   return hotnessArray;
-};
+}
