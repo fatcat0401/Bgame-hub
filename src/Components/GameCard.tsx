@@ -30,7 +30,7 @@ const GameCard = ({ game }: Props) => {
       />
       <CardBody padding={"5px"}>
         <Heading fontSize="2xl" marginY={3}>
-          {game.name} ({game.yearpublished}){game.id}
+          {game.name} ({parseInt(game.yearpublished)}){game.id}
         </Heading>
         {game.ranks.map((rank, index) => (
           <HStack
