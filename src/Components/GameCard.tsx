@@ -30,8 +30,7 @@ const GameCard = ({ game }: Props) => {
       />
       <CardBody padding={"5px"}>
         <Heading fontSize="2xl" marginY={3}>
-          {game.name}
-          {game.id}
+          {game.name} ({game.yearpublished}){game.id}
         </Heading>
         {game.ranks.map((rank, index) => (
           <HStack
@@ -48,7 +47,7 @@ const GameCard = ({ game }: Props) => {
           </HStack>
         ))}
 
-        <CardFooter pl={"100px"} >
+        <CardFooter pl={"100px"}>
           <Badge fontSize={"3xl"} fontWeight={"extrabold"} colorScheme="blue">
             {game.average.substring(0, 4)}
           </Badge>

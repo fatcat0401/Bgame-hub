@@ -24,7 +24,7 @@ const Genres = ({ selectedGenre, onSelectedGenre }: Props) => {
   ];
   return (
     <Menu>
-      <MenuButton marginX={3} as={Button} rightIcon={<BsChevronDown />}>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
         {selectedGenre.name}
       </MenuButton>
       <MenuList>

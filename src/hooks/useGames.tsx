@@ -11,6 +11,8 @@ export interface BoardGame {
   status: Status;
   ranks: Rank[];
   average: string;
+  yearpublished: string;
+  objectid: string;
 }
 
 export interface Rank {
@@ -29,6 +31,7 @@ interface Status {
 }
 
 const useGames = () => {
+  const list = ["id", "name", "thumbnail", "status", "ranks", "average"];
   const [games, setGames] = useState<BoardGame[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoadingState] = useState(false);

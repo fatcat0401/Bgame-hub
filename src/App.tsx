@@ -1,18 +1,28 @@
-import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+} from "@chakra-ui/react";
 import NavBar from "./Components/NavBar";
 import GameGrid from "./Components/GameGrid";
 import HotnessList from "./Components/HotnessList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGames";
 import Genres from "./Components/Genres";
+import SortSelector from "./Components/SortSelector";
 
 export interface GameQuery {
   genre: Genre;
+  selector: string;
 }
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     genre: { name: "All", slug: "boardgame" },
+    selector: "Relevance",
   } as GameQuery);
 
   return (
@@ -37,10 +47,18 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <Genres
-          selectedGenre={gameQuery.genre}
-          onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-        />
+        <HStack>
+          <Genres
+            selectedGenre={gameQuery.genre}
+            onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+          />
+          <SortSelector
+            selectedSelector={gameQuery.selector}
+            onSelectedSelector={(selector) =>
+              setGameQuery({ ...gameQuery, selector })
+            }
+          />
+        </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
