@@ -13,6 +13,7 @@ import {
 import React from "react";
 import { BoardGame } from "../hooks/useGames";
 import Rank from "./Rank";
+import Rating from "./Rating";
 
 interface Props {
   game: BoardGame;
@@ -46,12 +47,12 @@ const GameCard = ({ game }: Props) => {
             <Rank brank={rank.value} />
           </HStack>
         ))}
+        <HStack color={"gray.500"} justifyContent={"space-between"}>
+          <Text>Average Rating</Text>
+          <Rating avgRating={game.average.substring(0, 4)} />
+        </HStack>
 
-        <CardFooter pl={"100px"}>
-          <Badge fontSize={"3xl"} fontWeight={"extrabold"} colorScheme="blue">
-            {game.average.substring(0, 4)}
-          </Badge>
-        </CardFooter>
+        <CardFooter pl={"100px"}></CardFooter>
       </CardBody>
     </Card>
   );

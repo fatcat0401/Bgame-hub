@@ -2,12 +2,14 @@ import React from "react";
 import useHotness from "../hooks/useHotness";
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CardHeader,
   HStack,
   Heading,
   Image,
+  Link,
   List,
   ListItem,
   Spinner,
@@ -38,9 +40,10 @@ const HotnessList = () => {
                     boxSize={"40px"}
                     borderRadius={8}
                     pt={"5px"}
+                    objectFit="cover"
                   />
                   <Box>
-                    <Text fontSize={"md"} fontWeight={"extrabold"}>
+                    <Text as={Link} fontSize={"md"} fontWeight={"extrabold"}>
                       {hot.name}
                     </Text>
                     <Text fontSize={"md"}>{hot.yearpublished}</Text>
