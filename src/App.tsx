@@ -19,6 +19,7 @@ import SortSelector from "./Components/SortSelector";
 export interface GameQuery {
   genre: Genre;
   selector: string;
+  searchText: string;
 }
 
 function App() {
@@ -41,7 +42,9 @@ function App() {
       backgroundColor={"gray.400"}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>

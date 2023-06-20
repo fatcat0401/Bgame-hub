@@ -19,7 +19,8 @@ const GameGrid = ({ gameQuery }: Props) => {
       game.status.own === "1" &&
       game.ranks &&
       game.ranks.length > 0 &&
-      game.ranks.some((rank) => rank.name === gameQuery?.genre.slug)
+      game.ranks.some((rank) => rank.name === gameQuery?.genre.slug) &&
+      game.name.toLowerCase().includes(gameQuery?.searchText.toLowerCase())
   );
 
   if (gameQuery.selector === "Average Rating")
