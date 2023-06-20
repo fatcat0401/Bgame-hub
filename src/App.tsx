@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGames";
 import Genres from "./Components/Genres";
 import SortSelector from "./Components/SortSelector";
+import GameHeading from "./Components/GameHeading";
 
 export interface GameQuery {
   genre: Genre;
@@ -26,6 +27,7 @@ function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     genre: { name: "All", slug: "boardgame" },
     selector: "Relevance",
+    searchText: "",
   } as GameQuery);
 
   return (
@@ -52,20 +54,25 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <Flex marginLeft={3} marginBottom={4}>
-          <Box marginRight={5}>
-            <Genres
-              selectedGenre={gameQuery.genre}
-              onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+        <Box paddingLeft={3}>
+          <GameHeading gameQuery={gameQuery} />
+          <Flex marginBottom={4}>
+            <Box marginRight={5}>
+              <Genres
+                selectedGenre={gameQuery.genre}
+                onSelectedGenre={(genre) =>
+                  setGameQuery({ ...gameQuery, genre })
+                }
+              />
+            </Box>
+            <SortSelector
+              selectedSelector={gameQuery.selector}
+              onSelectedSelector={(selector) =>
+                setGameQuery({ ...gameQuery, selector })
+              }
             />
-          </Box>
-          <SortSelector
-            selectedSelector={gameQuery.selector}
-            onSelectedSelector={(selector) =>
-              setGameQuery({ ...gameQuery, selector })
-            }
-          />
-        </Flex>
+          </Flex>
+        </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
